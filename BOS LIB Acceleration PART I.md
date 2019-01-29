@@ -45,7 +45,7 @@ A benchmark has been made to test the performance of LIB Acceleration solution. 
 | 9 blocks   | 98.49%   |
 | 10 blocks   | 99.79%   |
 
-![图片](https://uploader.shimo.im/f/h4QymmD3CJMxMz6c.jpg!thumbnail)
+![benchmark_example](images/BOS_LIB_Acceleration_PART_I/benchmark_example.jpeg)
 
 ### Benchmark Details
 **Core Metric**:  
@@ -76,13 +76,13 @@ We take 5 groups data and calculate CDF(cumulative distribution function) for 6 
 
 calculate the standard deviation and mean:
 
-![formular](images/BOS_LIB_Acceleration_PART_I/stats_formular111.jpg)
+![formular](images/BOS_LIB_Acceleration_PART_I/stats_formular1.jpg)
 
 ![formular](images/BOS_LIB_Acceleration_PART_I/stats_formular2.png)
 
 then we calculate a 95% confidence interval:
 
-![图片](images/BOS_LIB_Acceleration_PART_I/stats_formular3.png)
+![formular](images/BOS_LIB_Acceleration_PART_I/stats_formular3.png)
 
 and get the result:  
 
@@ -109,5 +109,5 @@ In 24 hours, most of the time(21.6 hours) blocks enter LIB within 3 seconds, whi
 
 ## Reference  
 
-- ![BOS Technical White Paper](https://github.com/boscore/Documentation/blob/master/BOSCoreTechnicalWhitePaper.md)  
-- ![LIB Acceleration Design Document](https://github.com/eosiosg/dpos-pbft/blob/master/documentation/Algorithm%20for%20improving%20EOS%20consensus%20speed%20based%20on%20PBFT.md)  
+- [BOS Technical White Paper](https://github.com/boscore/Documentation/blob/master/BOSCoreTechnicalWhitePaper.md)  
+- [LIB Acceleration Design Document](https://github.com/eosiosg/dpos-pbft/blob/master/documentation/Algorithm%20for%20improving%20EOS%20consensus%20speed%20based%20on%20PBFT.md)  

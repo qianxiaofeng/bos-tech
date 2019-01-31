@@ -20,7 +20,7 @@ In most cases, it is related to the system contract.
 Usually, this happens when a very fundamental behavior changes and it does not act backward compatible. For example, Rex upgrade, DPOS-Batch-PBFT consensus protocol upgrade.
 
 
-## 2. system upgrade solution
+## 2. System Upgrade Solution
 We will discuss the possible solution to upgrade the consensus protocol,`from Pipeline BFT to Batch PBFT`, in BOS. We also want to discuss a general approach to make system upgrade process smoother.
 
 ### Terms:

@@ -23,7 +23,7 @@ The highlight features comparison is listed as follows:
 |    | **DPOS Pipeline BFT**   | **DPOS Batch PBFT**   |
 |:----|:----|:----|
 | **time**   | ~162.5 seconds   | ~3 seconds   |
-| **cpu/net overhead**   | N.A. (through blocks)   | CPU: constant overhead**, estimated around 8-10%  Net: constant overhead**, estimated equivalent to 42 transfer transactions  **The overhead is constant and is not sensitive to other factors such as TPS, network topology and block produce interval.   |
+| **cpu/net overhead**   | N.A. (through blocks)   | CPU: constant overhead**, estimated around 8-10%  <br>Net: constant overhead**, estimated equivalent to 42 transfer transactions  <br> **The overhead is constant and is not sensitive to other factors such as TPS, network topology and block produce interval.   |
 | **liveness**   | 100%, produce every 0.5 seconds   | 100%, produce every 0.5 seconds   |
 | **safety**   | tolerable up to 6 byzantine nodes   | tolerable up to 6 byzantine nodes   |
 | **safety in edge case**   | not safe, a hard fork may happen when two separate network exchange one bp each time   | safe, prepare and view change mechanism guarantee no hard fork happens   |
@@ -43,7 +43,7 @@ A benchmark has been made to test the performance of LIB Acceleration solution. 
 | 7 blocks   | 95.51%   |
 | 8 blocks   | 97.49%   |
 | 9 blocks   | 98.49%   |
-| 10 blocks   | 99.79%   |
+| 10 blocks   | 99.03%   |
 
 ![benchmark_example](images/BOS_LIB_Acceleration_PART_I/benchmark_example.jpeg)
 

@@ -29,51 +29,33 @@ We will discuss the possible solution to upgrade the consensus protocol,`from Pi
 Genesis block is the first block of blockchain and provides the source of trust. As time goes, Merkle tree and node network work together to provide the trust of the blockchain. GB-2nd is the second genesis block, for example in block #1,000,000, to re-build the source of trust point. it is critical to the trust chain especially when consensus rule has changed. A similar approach could take place during 3rd, 4th and x-th system upgrade.
 
 **Maintenance Mode**:  
-It has a boolean value on/off to indicate the maintenance status of system contract. If the value is on, system contract is in maintenance mode and should produce empty blocks with no user transactions; If the value is off, system contract is functioning normally.
+It has a boolean value ON/OFF to indicate the maintenance status of system contract. If the value is on, system contract is in maintenance mode and BP schedule is frozen; If the value is off, system contract is functioning normally.
 
 ### Possible Solution:  
+
+The brief idea is that all nodes and BPs switch to use Batch PBFT when GB-2nd enters LIB. In order to ensure the liveness, only function related to the BP schedule update is frozen temporarily.
+
 **PREPARE PHASES:**
 
 **prepare phase 0**: off-chain agreement on upgrade solution
 
 **prepare phase 1**: decide GB-2nd block number, for example block #1,000,000
 
-**prepare phase 2**: all related BPs upgrade to new version node and system contract
+**prepare phase 2**: all related BPs and full nodes upgrade to new version node and system contract
+
+**prepare phase 3**: use multi-sig to set GB-2nd block number
 
 **EXECUTION PHASES:**
 
-**phase 0**: set GB-2nd in system contract
+`This phase is an automated upgrading process. All functions work normally except BP schedule is frozen for near 3 minutes.`
 
-**phase 1**: wait until GB-2nd is produced. Maintenance mode should be switched to on automatically by system contract. Thereafter, only empty blocks should be produced.
+**phase 0**: when head block number is less than GB-2nd, Pipeline BFT is chosen.
 
-**phase 2**: wait until GB-2nd enters LIB.
+**phase 1**: wait until GB-2nd is produced. Maintenance mode should be switched to ON automatically. Thereafter BP schedule is frozen until upgrade finished.
 
-**phase 3**: current active BPs use tools to validate and sign GB-2nd.
+**phase 2**: wait until GB-2nd enters LIB. Then all BPs and nodes switch to use Batch PBFT. Meanwhile, switch maintenance mode to OFF and unfreeze BP schedule. The upgrade is finished.
 
-**phase 4**: resume block producing and activate PBFT process by call producer api.
-
-**phase 5**: switch maintenance mode to off and the upgrading process is finished.
-
-There are different approaches to decide GB-2nd. The choice will adjust the execution details accordingly.
-### 2.1 GB-2nd Choice 1: ABP
-GB-2nd is decided at **"run-time"**.
-
-there are two ways to select ABP:
-1. ABP is pre-selected and is one of active BPs. For example, GB-2nd is the block satisfied two conditions: 1. It is after block #1,000,000. 2. It is the first block produced by ABP.
-2. ABP is a new BP playing the role very similar to the "ABP" in the boot sequence. For example, GB-2nd-prepare-phase is block #1,000,000, and in that block, ABP should be appointed and become active BP after GB-2nd-prepare-phase enters LIB. The head block, where GB-2nd-prepare-phase enters LIB, becomes GB-2nd at run-time.
-
-In either way, ABP is granted the privileges equivalent to eosio. The privilege transit process can be described as follows:  
-
-`eosio -> 21 BPs -> ABP -> maintenance -> 21 BPs`
-
-### 2.2 GB-2nd Choice 2: hot standby upgrade
-GB-2nd is decided at **"compile-time"**.
-
-All active BPs run two versions BP nodes concurrently. Version 1 BPs keep on producing empty blocks after GB-2nd; Version 2 BPs follow upgrade steps and resume the network when it is stable. After that, Version 1 BPs could be shut down and the upgrading process is finished.
-
-The privilege transit process can be described as follows:  
-
-`eosio -> 21 BPs -> maintenance -> 21 BPs`
+When GB-2nd enters LIB, there are 300+ blocks between HEAD and LIB. These blocks hold proof that GB-2nd is valid under the previous consensus algorithm. Therefore, GB-2nd becomes a trusted source. After the switch, BPs start the process of Batch PBFT based on GB-2nd, 300+ blocks mentioned above will go through prepare and commit phases and kept in chain.
 
 ## 3. Conclusions
 We have discussed why system upgrade is fundamental to software and blockchain. We also discussed a possible solution to upgrade consensus protocol `from Pipeline BFT to Batch PBFT`.

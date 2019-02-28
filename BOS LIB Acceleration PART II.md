@@ -35,6 +35,7 @@ It has a boolean value ON/OFF to indicate the maintenance status of system contr
 
 The brief idea is that all nodes and BPs switch to use Batch PBFT when GB-2nd enters LIB. In order to ensure the liveness, only function related to the BP schedule update is frozen temporarily.
 
+
 **PREPARE PHASES:**
 
 **prepare phase 0**: off-chain agreement on upgrade solution
@@ -55,7 +56,11 @@ The brief idea is that all nodes and BPs switch to use Batch PBFT when GB-2nd en
 
 **phase 2**: wait until GB-2nd enters LIB. Then all BPs and nodes switch to use Batch PBFT. Meanwhile, switch maintenance mode to OFF and unfreeze BP schedule. The upgrade is finished.
 
-When GB-2nd enters LIB, there are 300+ blocks between HEAD and LIB. These blocks hold proof that GB-2nd is valid under the previous consensus algorithm. Therefore, GB-2nd becomes a trusted source. After the switch, BPs start the process of Batch PBFT based on GB-2nd, 300+ blocks mentioned above will go through prepare and commit phases and kept in chain.
+
+![lib_upgrade](images/BOS_LIB_Acceleration_PART_II/lib_upgrade.jpg)
+
+
+When GB-2nd enters LIB, there are 300+ blocks between HEAD and LIB. These blocks hold proof that GB-2nd is valid under the previous consensus algorithm. Therefore, GB-2nd becomes a trusted source. After the switch, BPs start the process of Batch PBFT based on GB-2nd, 300+ blocks mentioned above will go through prepare and commit phases and be kept in chain.
 
 ## 3. Conclusions
 We have discussed why system upgrade is fundamental to software and blockchain. We also discussed a possible solution to upgrade consensus protocol `from Pipeline BFT to Batch PBFT`.
